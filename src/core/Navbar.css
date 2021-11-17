@@ -1,0 +1,29 @@
+#header{
+    color:#fff;
+    background: #303F60;
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+}
+.buttonToggle a{
+    color: white;
+}
+#header::after{
+    background: #4D618E;
+    content:"";
+    display: block;
+    width: 92%;
+    height: 2px;
+    margin: auto;
+}
+a:hover{
+    color:lightblue;
+    text-decoration: none;
+}
+
+.light-blue {
+    color: #43afff;
+  }
+  
