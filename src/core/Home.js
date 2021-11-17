@@ -18,29 +18,35 @@ function Home() {
     <>
       <div className="container-fluid section1">
         <div className="container pt-4">
-          <div className="row mt-5">
+          <div className="row mt-5 section1row">
             <div className="col-md-6">
-              <h2>Welocome to</h2>
-              <h1>
+              <h1 className="display-4">Welocome to</h1>
+              <h1 className="font-weight-bold display-4">
                 My<span className="light-blue">Jobs</span>
               </h1>
               <Link to="/">
-                <button className="btn btn-primary m-3">Get Started</button>
+                <button className="btn btn-primary mr-3 mt-3 mb-3">
+                  Get Started
+                </button>
               </Link>
             </div>
-            <div className="col-md-6">
-              <img src={ladyImg} className="img-fluid rounded" alt="picute" />
+            <div className=" col-md-6 marginNagetive">
+              <img
+                src={ladyImg}
+                className="shadow img-fluid rounded"
+                alt="picute"
+              />
             </div>
           </div>
         </div>
       </div>
-      <div className="container-fluid section2">
+      <div className="container-fluid section2 pt-5">
         <div className="container pt-5">
           <div className="row pl-3">
             <h4 className="text-secondary font-weight-bold">Why us</h4>
           </div>
           <div className="row justify-content-between">
-            <div className="col-md-3 m-3 p-5 bg-white">
+            <div className="col-md-3 m-3 p-5 bg-white rounded">
               <div>
                 <h4 className="row light-blue pr-3">Get More Visibiltiy</h4>
               </div>
@@ -52,7 +58,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-md-3  m-3  p-5 bg-white">
+            <div className="col-md-3  m-3  p-5 bg-white rounded">
               <div className="row ">
                 <h4 className="row light-blue">Organise Your Condidate</h4>
               </div>
@@ -64,7 +70,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-md-3  m-3 p-5 bg-white">
+            <div className="col-md-3  m-3 p-5 bg-white rounded">
               <div className="row">
                 <h4 className="row light-blue">Verify Their Availity</h4>
               </div>
@@ -80,20 +86,30 @@ function Home() {
         </div>
         <div className="container pt-5 pb-5">
           <div className="row pl-3 ">
-            <h4 className="text-secondary font-weight-bold">Companies Who Trust Us</h4>
+            <h4 className="text-secondary font-weight-bold">
+              Companies Who Trust Us
+            </h4>
           </div>
           <div className="row justify-content-center">
             <div className="col-md-2 m-2">
               <img src={amara} className="img-fluid companyImg" alt="amara" />
             </div>
             <div className="col-md-2 m-2">
-              <img src={goldline} className="img-fluid companyImg" alt="goldline" />
+              <img
+                src={goldline}
+                className="img-fluid companyImg"
+                alt="goldline"
+              />
             </div>
             <div className="col-md-2 m-2">
               <img src={hexa} className="img-fluid companyImg" alt="hexa" />
             </div>
             <div className="col-md-2 m-2">
-              <img src={lightai} className="img-fluid companyImg" alt="lightai" />
+              <img
+                src={lightai}
+                className="img-fluid companyImg"
+                alt="lightai"
+              />
             </div>
             <div className="col-md-2 m-2">
               <img src={kanba} className="img-fluid companyImg" alt="kanba" />
@@ -102,10 +118,18 @@ function Home() {
               <img src={liva} className="img-fluid companyImg" alt="liva" />
             </div>
             <div className="col-md-2 m-2">
-              <img src={solaytic} className="img-fluid companyImg" alt="solaytic" />
+              <img
+                src={solaytic}
+                className="img-fluid companyImg"
+                alt="solaytic"
+              />
             </div>
             <div className="col-md-2 m-2">
-              <img src={velocity} className="img-fluid companyImg" alt="velocity" />
+              <img
+                src={velocity}
+                className="img-fluid companyImg"
+                alt="velocity"
+              />
             </div>
             <div className="col-md-2 m-2">
               <img src={ztos} className="img-fluid companyImg" alt="ztos" />
