@@ -86,7 +86,7 @@ function Signup() {
           <div className="col-md-5 formsection ">
             <form className="bg-white p-4 text-dark round ">
               <h4 className="">Signup</h4>
-              <p className="text-danger m-0">{message}</p>
+              {message?<p className="text-danger m-0">{message}</p>:""}
               <label for="btnToggle" className="mt-4">
                 I'm a*
               </label>
@@ -136,9 +136,8 @@ function Signup() {
                   placeholder="Enter your full name"
                 />
                 <small>
-                  <label for="inputName" className="text-danger">
-                    {nameError}
-                  </label>
+                  {nameError?<label for="inputName" className="text-danger">
+                    {nameError}</label>:""}
                 </small>
               </div>
               <div className="form-group">
@@ -153,9 +152,8 @@ function Signup() {
                   placeholder="Enter your email"
                 />
                 <small>
-                  <label for="inputName" className="text-danger">
-                    {emailError}
-                  </label>
+                {emailError?<label for="inputName" className="text-danger">
+                    {emailError}</label>:""}
                 </small>
               </div>
               <div class="form-row">
@@ -181,9 +179,8 @@ function Signup() {
                     placeholder="Enter your password"
                   />
                   <small>
-                    <label for="inputName" className="text-danger">
-                      {passwordError}
-                    </label>
+                  {passwordError?<label for="inputName" className="text-danger">
+                    {passwordError}</label>:""}
                   </small>
                 </div>
               </div>
