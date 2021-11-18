@@ -7,7 +7,7 @@ function Singin() {
     <>
       <div className="container-fluid section1">
         <div className="row justify-content-center section1row">
-          <div className="col-md-5 formsection ">
+          <div className="col-md-5 signinformsection ">
             <form className="bg-white p-4 text-dark round ">
             <h4 className="">Login</h4>
 
