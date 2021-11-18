@@ -41,7 +41,7 @@ function ResetPassword() {
           </div>
         </div>
       </div>
-      <div className="container-fluid signSection2"></div>
+      <div className="container-fluid resetSection2"></div>
     </>
   );
 }
