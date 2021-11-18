@@ -3,16 +3,22 @@
 }
 .formsection{
     
-    margin-bottom: -20git 0px;
+    margin-bottom: -300px;
     margin-top: 100px;
 }
 /* .section1row{
     border: 5px solid green;
 } */
-.signSection2{
-    height: 350px;
+.signupSection2{
+    height: 50vh;
     background: #EDF6FF;
 }
+
+.hideCircle {
+    /* display: none; */
+    /*visibility: hidden;*/
+}
+
 .round{
     border-radius: 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

@@ -45,7 +45,7 @@ function Singin() {
           </div>
         </div>
       </div>
-      <div className="container-fluid signSection2"></div>
+      <div className="container-fluid signinSection2"></div>
     </>
   );
 }

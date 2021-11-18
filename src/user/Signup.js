@@ -1,8 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { API } from "../config";
 import "../user/Signup.css";
 
 function Signup() {
+  const [errors, setErrors] = useState({
+    message: "",
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+  });
+  const [values, setValues] = useState({
+    email: "",
+    userRole: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    skills: "",
+  });
+  //change userRole to Integer
+  values.userRole = Number(values.userRole);
+  const { message, nameError, emailError, passwordError } = errors;
+  const { email, userRole, password, confirmPassword, name, skills } = values;
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
+
+  const signup = (user) => {
+    return fetch(`${API}/auth/register`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .catch((err) => {
+        console.log("err" + err);
+      });
+  };
+  const clickSubmit = (event) => {
+    event.preventDefault();
+    //change userRole to integer
+    signup({ email, userRole, password, confirmPassword, name, skills }).then(
+      (data) => {
+        console.log("data" + JSON.stringify(data));
+        if (data.message) {
+          setErrors({
+            message: data.message,
+          });
+        } else {
+          // Object.keys(obj)
+          // const numbers1 = [45, 4, 9, 16, 25];
+          data.errors.map((e) => {
+            if ("email" in e) {
+              return setErrors({ emailError: Object.values(e)[0] });
+            } else if ("name" in e) {
+              return setErrors({ nameError: Object.values(e)[0] });
+            } else if ("password" in e) {
+              return setErrors({ passwordError: Object.values(e)[0] });
+            }
+            return "";
+          });
+        }
+
+        setValues({
+          email: "",
+          userRole: "",
+          password: "",
+          confirmPassword: "",
+          name: "",
+          skills: "",
+        });
+      }
+    );
+  };
+
   return (
     <>
       <div className="container-fluid section1">
@@ -10,32 +86,86 @@ function Signup() {
           <div className="col-md-5 formsection ">
             <form className="bg-white p-4 text-dark round ">
               <h4 className="">Signup</h4>
+              <p className="text-danger m-0">{message}</p>
+              <label for="btnToggle" className="mt-4">
+                I'm a*
+              </label>
+              <br />
+              <div
+                id="btnToggle"
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              >
+                <input
+                  type="radio"
+                  class="btn-check hideCircle"
+                  value="1"
+                  onChange={handleChange("userRole")}
+                  name="role"
+                  id="btnradioRecruiter"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-primary mr-3" for="btnradio1">
+                  Recruiter
+                </label>
+
+                <input
+                  type="radio"
+                  class="btn-check hideCircle"
+                  value="0"
+                  onChange={handleChange("userRole")}
+                  name="role"
+                  id="btnradioCandidate"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-primary" for="btnradio3">
+                  Candidate
+                </label>
+              </div>
+
               <div className="form-group">
                 <label for="inputName">Full Name*</label>
                 <input
                   type="text"
                   className="form-control form-control-lg"
+                  value={name}
+                  onChange={handleChange("name")}
                   id="inputName"
                   aria-describedby="nameHelp"
                   placeholder="Enter your full name"
                 />
+                <small>
+                  <label for="inputName" className="text-danger">
+                    {nameError}
+                  </label>
+                </small>
               </div>
               <div className="form-group">
                 <label for="inputEmail">Email address*</label>
                 <input
                   type="email"
                   className="form-control form-control-lg"
+                  value={email}
+                  onChange={handleChange("email")}
                   id="inputEmail"
                   aria-describedby="emailHelp"
                   placeholder="Enter your email"
                 />
+                <small>
+                  <label for="inputName" className="text-danger">
+                    {emailError}
+                  </label>
+                </small>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                <label for="inputPassword">Password*</label>
+                  <label for="inputPassword">Password*</label>
                   <input
                     type="password"
                     class="form-control form-control-lg"
+                    value={password}
+                    onChange={handleChange("password")}
                     id="inputPassword"
                     placeholder="Enter your password"
                   />
@@ -45,9 +175,16 @@ function Signup() {
                   <input
                     type="password"
                     class="form-control form-control-lg"
+                    value={confirmPassword}
+                    onChange={handleChange("confirmPassword")}
                     id="ConfirmInputPassword"
                     placeholder="Enter your password"
                   />
+                  <small>
+                    <label for="inputName" className="text-danger">
+                      {passwordError}
+                    </label>
+                  </small>
                 </div>
               </div>
               <div className="form-group">
@@ -55,6 +192,8 @@ function Signup() {
                 <input
                   type="text"
                   className="form-control form-control-lg"
+                  value={skills}
+                  onChange={handleChange("skills")}
                   id="inputSkill"
                   aria-describedby="skillHelp"
                   placeholder="Enter comma seprated skills"
@@ -64,17 +203,26 @@ function Signup() {
                 <div className="col center">
                   <button
                     type="submit"
+                    onClick={clickSubmit}
                     className="btn pl-4 pr-4 btn-primary btn-lg mb-5 center "
                   >
                     Signup
                   </button>
+                  <p>
+                    Have an account?{" "}
+                    <span>
+                      <Link className="text-primary" to="/signin">
+                        Login
+                      </Link>
+                    </span>
+                  </p>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div className="container-fluid signSection2"></div>
+      <div className="container-fluid signupSection2"></div>
     </>
   );
 }
