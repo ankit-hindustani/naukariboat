@@ -35,7 +35,7 @@ function ForgetPassword() {
           </div>
         </div>
       </div>
-      <div className="container-fluid signSection2"></div>
+      <div className="container-fluid forgetSection2"></div>
     </>
   );
 }
