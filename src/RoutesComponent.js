@@ -3,6 +3,7 @@ import { BrowserRouter,Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./core/Home";
 import Navbar from "./core/Navbar";
+import ResetPassword from "./user/ResetPassword";
 import Singin from "./user/Signin";
 import Signup from "./user/Signup";
 
@@ -15,6 +16,7 @@ const RoutesComponent = () => {
         <Route path="/"  element={<Home/>} />
         <Route path="/signin"  element={<Singin/>} />
         <Route path="/signup"  element={<Signup/>} />
+        <Route path="/resetpassword"  element={<ResetPassword/>} />
       </Routes>
     </BrowserRouter>
   );

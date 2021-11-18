@@ -1,29 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../user/Signin.css";
+import "../user/ResetPassword.css";
 
-function Singin() {
+function ResetPassword() {
   return (
     <>
       <div className="container-fluid section1">
         <div className="row justify-content-center section1row">
           <div className="col-md-5 formsection ">
             <form className="bg-white p-4 text-dark round ">
-            <h4 className="">Login</h4>
-
+            <h4 className="">Reset your password</h4>
               <div className="form-group">
-                <label for="inputEmail">Email address</label>
+                <label for="inputPassword">New Password</label>
                 <input
-                  type="email"
+                  type="password"
                   className="form-control form-control-lg"
-                  id="inputEmail"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
+                  id="inputPassword"
+                  placeholder="Password"
                 />
               </div>
               <div className="form-group">
-                <label for="inputPassword">Password</label>
-                <Link to="" className="float-right text-primary">Forget your password?</Link>
+                <label for="inputPassword">Confirm New Password</label>
                 <input
                   type="password"
                   className="form-control form-control-lg"
@@ -35,9 +32,8 @@ function Singin() {
               <div className="row p-4 ">
                 <div className="col center">
                 <button type="submit" className="btn pl-4 pr-4 btn-primary btn-lg mb-5 center ">
-                 Login 
+                 Reset 
               </button>
-                    <p>New to MyJobs?<span ><Link className="text-primary" to="">Create an account</Link></span></p>
                 </div>
             </div>
             </form>
@@ -50,4 +46,4 @@ function Singin() {
   );
 }
 
-export default Singin;
+export default ResetPassword;

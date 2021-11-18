@@ -24,8 +24,8 @@ function Home() {
               <h1 className="font-weight-bold display-4">
                 My<span className="light-blue">Jobs</span>
               </h1>
-              <Link to="/">
-                <button className="btn btn-primary mr-3 mt-3 mb-3">
+              <Link to="/signup">
+                <button className="btn btn-info btn-lg mr-3 mt-3 mb-3">
                   Get Started
                 </button>
               </Link>

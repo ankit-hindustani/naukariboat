@@ -9,13 +9,13 @@ const Navbar = () => {
           <div className="col-6 logo">
             {/* <h3 id="logo">My<span className="light-blue">job</span></h3> */}
             <Link to="/">
-              <h4 id="logo">
+              <h4 className="font-weight-bold" id="logo">
                 My<span className="light-blue">job</span>
               </h4>
             </Link>
           </div>
           <div className="col-6 buttonToggle">
-            <Link to="/" class="float-right">
+            <Link to="/signin" class="float-right">
               <button className="btn btn-primary mb-2 bg-transparent">Login/Signup</button>
             </Link>
           </div>
