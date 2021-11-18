@@ -23,7 +23,7 @@ function Singin() {
               </div>
               <div className="form-group">
                 <label for="inputPassword">Password</label>
-                <Link to="" className="float-right text-primary">Forget your password?</Link>
+                <Link to="/forgetpassword" className="float-right text-primary">Forget your password?</Link>
                 <input
                   type="password"
                   className="form-control form-control-lg"
@@ -37,7 +37,7 @@ function Singin() {
                 <button type="submit" className="btn pl-4 pr-4 btn-primary btn-lg mb-5 center ">
                  Login 
               </button>
-                    <p>New to MyJobs?<span ><Link className="text-primary" to="">Create an account</Link></span></p>
+                    <p>New to MyJobs?<span ><Link className="text-primary" to="/signup">Create an account</Link></span></p>
                 </div>
             </div>
             </form>
