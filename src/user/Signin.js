@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signin } from "../auth";
+import { authenticate, signin } from "../auth";
 import "../user/Signin.css";
 
 function Singin() {
   const [errors, setErrors] = useState({
+    message: "",
     emailError: "",
     passwordError: "",
   });
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: "ankitsingh.as.103@gmail.com",
+    password: "ankitS",
   });
 
-  const { emailError, passwordError } = errors;
+  const { message, emailError, passwordError } = errors;
   const { email, password } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -28,7 +29,8 @@ function Singin() {
         setErrors({
           message: data.message,
         });
-      } else {
+      }
+      if (data.errors) {
         data.errors.map((e) => {
           if ("email" in e) {
             return setErrors({ emailError: Object.values(e)[0] });
@@ -36,6 +38,10 @@ function Singin() {
             return setErrors({ passwordError: Object.values(e)[0] });
           }
           return "";
+        });
+      } else {
+        authenticate(data, () => {
+          setValues({ ...values });
         });
       }
 
@@ -53,6 +59,7 @@ function Singin() {
           <div className="col-md-5 signinformsection ">
             <form className="bg-white p-4 text-dark round ">
               <h4 className="">Login</h4>
+              {message ? <p className="text-danger m-0">{message}</p> : ""}
 
               <div className="form-group">
                 <label for="inputEmail">Email address*</label>
