@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { API } from "../config";
+import { signup } from "../auth";
 import "../user/Signup.css";
 
 function Signup() {
@@ -26,35 +26,18 @@ function Signup() {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  const signup = (user) => {
-    return fetch(`${API}/auth/register`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .catch((err) => {
-        console.log("err" + err);
-      });
-  };
+  
   const clickSubmit = (event) => {
     event.preventDefault();
-    //change userRole to integer
+    //send to server
     signup({ email, userRole, password, confirmPassword, name, skills }).then(
       (data) => {
-        console.log("data" + JSON.stringify(data));
+        // console.log("data" + JSON.stringify(data));
         if (data.message) {
           setErrors({
             message: data.message,
           });
         } else {
-          // Object.keys(obj)
-          // const numbers1 = [45, 4, 9, 16, 25];
           data.errors.map((e) => {
             if ("email" in e) {
               return setErrors({ emailError: Object.values(e)[0] });
