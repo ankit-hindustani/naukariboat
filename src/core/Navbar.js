@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { isAuthenticated, signout } from "../auth";
 import "../core/Navbar.css";
 const Navbar = () => {
   return (
@@ -15,9 +16,12 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="col-6 buttonToggle">
-            <Link to="/signin" class="float-right">
+            {!isAuthenticated() && <Link to="/signin" class="float-right">
               <button className="btn btn-primary mb-2 bg-transparent">Login/Signup</button>
-            </Link>
+            </Link>}
+            {isAuthenticated() && <Link to="/" class="float-right">
+              <button className="btn btn-primary mb-2 bg-transparent" onClick={signout()}>Logout</button>
+            </Link>}
           </div>
         </div>
       </div>

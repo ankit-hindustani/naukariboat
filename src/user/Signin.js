@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes, Navigate } from "react-router-dom";
 import { authenticate, signin } from "../auth";
 import "../user/Signin.css";
 
@@ -12,10 +12,11 @@ function Singin() {
   const [values, setValues] = useState({
     email: "",
     password: "",
+    referToDashboard: false,
   });
 
   const { message, emailError, passwordError } = errors;
-  const { email, password } = values;
+  const { email, password, referToDashboard } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -41,7 +42,7 @@ function Singin() {
         });
       } else {
         authenticate(data, () => {
-          setValues({ ...values });
+          setValues({ ...values, referToDashboard: true });
         });
       }
 
@@ -50,6 +51,18 @@ function Singin() {
         password: "",
       });
     });
+  };
+
+  const redirectUser = () => {
+    if (referToDashboard) {
+      //   return <Redirect to="/" />
+
+      return (
+        <Routes>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      );
+    }
   };
 
   return (
@@ -84,6 +97,7 @@ function Singin() {
               </div>
               <div className="form-group">
                 <label for="inputPassword">Password*</label>
+                <Link to="/forgetpassword" className="float-right text-primary">Forget your password?</Link>
                 <input
                   type="password"
                   className="form-control form-control-lg"
@@ -128,6 +142,7 @@ function Singin() {
         </div>
       </div>
       <div className="container-fluid signinSection2"></div>
+      {redirectUser()}
     </>
   );
 }

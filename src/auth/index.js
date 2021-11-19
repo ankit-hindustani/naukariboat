@@ -40,3 +40,20 @@ export const authenticate = (data, cb) => {
     cb();
   }
 };
+
+export const signout = (data, cb) => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("jwt").cb();
+  }
+};
+
+export const isAuthenticated = () => {
+  if (typeof window == "undefined") {
+    return false;
+  }
+  if (localStorage.getItem("jwt")) {
+    return JSON.parse(localStorage.getItem("jwt"));
+  } else {
+    return false;
+  }
+};
