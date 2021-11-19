@@ -10,8 +10,8 @@ function Singin() {
     passwordError: "",
   });
   const [values, setValues] = useState({
-    email: "ankitsingh.as.103@gmail.com",
-    password: "ankitS",
+    email: "",
+    password: "",
   });
 
   const { message, emailError, passwordError } = errors;
