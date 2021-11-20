@@ -12,10 +12,12 @@ import liva from "../images/liva.png";
 import solaytic from "../images/solaytic.png";
 import velocity from "../images/velocity.png";
 import ztos from "../images/ztos.png";
+import Navbar from "./Navbar";
 
 function Home() {
   return (
     <>
+<Navbar/>
       <div className="container-fluid section1">
         <div className="container pt-4">
           <div className="row mt-5 section1row">

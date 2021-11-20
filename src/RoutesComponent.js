@@ -17,7 +17,7 @@ import Signup from "./user/Signup";
 const RoutesComponent = () => {
   return (
     <BrowserRouter>
-      <Navbar />
+      {/* <Navbar /> */}
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Singin} />

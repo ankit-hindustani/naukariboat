@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory,useLocation,withRouter,Redirect } from "react-router-dom";
+import {
+  Link,
+  useHistory,
+  useLocation,
+  withRouter,
+  Redirect,
+} from "react-router-dom";
 import { isAuthenticated, signout } from "../auth";
 import "../core/Navbar.css";
+import ToastMessage from "./ToestMessage";
 const Navbar = () => {
   let history = useHistory();
   // let location = useLocation();
@@ -20,19 +27,21 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="col-6 buttonToggle">
-            {console.log("isAuth" + isAuthenticated())}
+            {/* {console.log("isAuth" + isAuthenticated())} */}
             {isAuthenticated() ? (
               <Link to="/" class="float-right float-right">
-              <button
-                className="btn btn-primary mb-2 bg-transparent "
-                onClick={()=>signout(() => {
-                  history.push("/");
-                  <Redirect to="/" />
-                  
-                })}
-              >
-                Logout
-              </button>
+                <button
+                  className="btn btn-primary mb-2 bg-transparent "
+                  onClick={() =>
+                    signout(() => {
+                      history.push("/");
+                      <Redirect to="/" />;
+                      // <ToastMessage toastfun={true} />;
+                    })
+                  }
+                >
+                  Logout
+                </button>
               </Link>
             ) : (
               <Link to="/signin" class="float-right">

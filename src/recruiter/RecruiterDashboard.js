@@ -2,16 +2,52 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 import { API } from "../config";
+import Navbar from "../core/Navbar";
 import "../recruiter/RecruiterDashboard.css";
+import ApplicationModel from "./ApplicationModel";
 
 function RecruiterDashboard() {
   const [data, setData] = useState(null);
+  const [applicantsData, setapplicantsData] = useState(null);
+  const [applicantsLoading, setapplicantsLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [message, setMessage] = useState(null);
-  useEffect(() => {
-    fetch(`${API}/recruiters/jobs?page=${pageNum}`, {
+  const [applicantsMessage, setapplicantsMessage] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
+    useEffect(() => {
+      fetch(`${API}/recruiters/jobs?page=${pageNum}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: isAuthenticated().data.token,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          // console.log("data recruiter response = " + data);
+          if (data.data) {
+            setData(data.data.data);
+          } else if (data.message) {
+            setMessage(data.message);
+            setData(null);
+          } else if (data.name) {
+            setError(data.name);
+          }
+        })
+        .catch((err) => {
+          console.log("err= " + err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, [pageNum]);
+
+  const fetchApplicants = (id) => {
+    fetch(`${API}/recruiters/jobs/${id}/candidates`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -22,12 +58,12 @@ function RecruiterDashboard() {
         return response.json();
       })
       .then((data) => {
-        console.log("data recruiter response = " + data);
+        // console.log("data applicants response = " + data);
         if (data.data) {
-          setData(data.data.data);
+          setapplicantsData(data.data);
         } else if (data.message) {
-          setMessage(data.message);
-          setData(null);
+          setapplicantsMessage(data.message);
+          setapplicantsData(null);
         } else if (data.name) {
           setError(data.name);
         }
@@ -36,12 +72,13 @@ function RecruiterDashboard() {
         console.log("err= " + err);
       })
       .finally(() => {
-        setLoading(false);
+        setapplicantsLoading(false);
       });
-  }, [pageNum]);
+  };
 
   return (
     <>
+      <Navbar />
       <div className="container-fluid dashSection1">
         <div className="container pt-2">
           <div className="row  pb-4">
@@ -87,7 +124,9 @@ function RecruiterDashboard() {
                         <button
                           className="btn btn-info btn-sm"
                           onClick={() => {
-                            //   console.log(data.id);
+                            setModalShow(true);
+                            fetchApplicants(data.id);
+                            
                           }}
                         >
                           View Applications
@@ -103,23 +142,27 @@ function RecruiterDashboard() {
               ""
             )}
 
-            {(!data && !message )? (
+            {!data && !message ? (
               <div className="container">
                 <div className="row mt-5 pt-5 justify-content-center">
                   <div className="">
                     <i class="fas fa-edit text-muted fa-6x "></i>
                   </div>
                 </div>
-                  
+
                 <div className="row">
-                    <div className="m-auto pt-3">
-                    <h5 className="text-muted ">Your posted jobs will show here!</h5>
-                    </div>
+                  <div className="m-auto pt-3">
+                    <h5 className="text-muted ">
+                      Your posted jobs will show here!
+                    </h5>
+                  </div>
                 </div>
                 <div className="row">
-                    <div className="m-auto pt-3">
-                        <Link to="/postjob"><button className="btn btn-info">Post a Job</button></Link>
-                    </div>
+                  <div className="m-auto pt-3">
+                    <Link to="/postjob">
+                      <button className="btn btn-info">Post a Job</button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -128,7 +171,19 @@ function RecruiterDashboard() {
           </div>
         </div>
         <div className="container">
-          <div className="row justify-content-center pl-5">
+          <div className="row justify-content-center">
+            {/* modal start */}
+
+            <ApplicationModel
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              data={applicantsData}
+              message={applicantsMessage}
+              loading={applicantsLoading}
+              
+            />
+
+            {/* modal end */}
             <div className="">
               <button
                 className="btn btn-primary"

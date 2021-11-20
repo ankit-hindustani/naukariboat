@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { isAuthenticated } from "../auth";
 import { API } from "../config";
 import "../candidate/CandidateDashboard.css";
+import Navbar from "../core/Navbar";
 
 function CandidateDashboard() {
   const [data, setData] = useState(null);
@@ -34,6 +33,7 @@ function CandidateDashboard() {
   }, [pageNum]);
   return (
     <>
+    <Navbar/>
       <div className="container-fluid dashSection1">
         <div className="container pt-2">
           <div className="row  pb-4">

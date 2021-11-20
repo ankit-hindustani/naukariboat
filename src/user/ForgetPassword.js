@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { authenticate, resetPassword } from "../auth";
+import Navbar from "../core/Navbar";
 import "../user/ForgetPassword.css";
 
 function ForgetPassword() {
@@ -48,6 +49,7 @@ function ForgetPassword() {
   };
   return (
     <>
+    <Navbar/>
       <div className="container-fluid section1">
         <div className="row justify-content-center section1row">
           <div className="col-md-5 formsection ">
