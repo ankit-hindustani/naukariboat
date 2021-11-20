@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import App from "./App";
-import PrivateRoute from "./auth/PrivateRoute";
+import CandidateRoute from "./auth/PrivateRoute";
+import RecruiterRoute from "./auth/RecruiterRoute";
+import CandidateDashboard from "./candidate/CandidateDashboard";
 import Home from "./core/Home";
 import Navbar from "./core/Navbar";
-import Dashboard from "./user/Dashboard";
+import RecruiterDashboard from "./recruiter/RecruiterDashboard";
 import ForgetPassword from "./user/ForgetPassword";
 import ResetPassword from "./user/ResetPassword";
 import Singin from "./user/Signin";
@@ -20,8 +22,12 @@ const RoutesComponent = () => {
         <Route path="/signin" exact component={Singin} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/forgetpassword" exact component={ForgetPassword} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/resetpassword" exact component={ResetPassword} />
+        
+        <CandidateRoute path="/resetpassword" exact component={ResetPassword} />
+        <CandidateRoute path="/candidatedashboard" exact component={CandidateDashboard} />
+        <RecruiterRoute path="/resetpassword" exact component={ResetPassword} />
+        <RecruiterRoute path="/recruiterdashboard" exact component={RecruiterDashboard} />
+      
 
       </Switch>
       

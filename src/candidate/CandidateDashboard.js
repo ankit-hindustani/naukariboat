@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 import { API } from "../config";
-import "../recruiter/RecruiterDashboard.css";
+import "../candidate/CandidateDashboard.css";
 
-function RecruiterDashboard() {
+function CandidateDashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -102,4 +102,4 @@ function RecruiterDashboard() {
   );
 }
 
-export default RecruiterDashboard;
+export default CandidateDashboard;

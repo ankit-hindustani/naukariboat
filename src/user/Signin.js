@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory, Redirect } from "react-router-dom";
-import { authenticate, signin } from "../auth";
+import { authenticate, isAuthenticated, signin } from "../auth";
 import "../user/Signin.css";
 
 function Singin() {
@@ -56,10 +56,14 @@ function Singin() {
   };
 
   const redirectUser = () => {
-    if (referToDashboard) {
-      history.push("/dashboard");
-        return <Redirect to="/dashboard" />
+    if (referToDashboard && isAuthenticated().data.userRole === 1) {
+      history.push("/candidatedashboard");
+        return <Redirect to="/candidatedashboard" />
+    }if (referToDashboard && isAuthenticated().data.userRole === 0) {
+      history.push("/recruiterdashboard");
+        return <Redirect to="/recruiterdashboard" />
     }
+    
   };
 
   return (

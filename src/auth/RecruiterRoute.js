@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Redirect, Route } from "react-router";
 import { isAuthenticated } from ".";
 
-const CandidateRoute = ({ component: Component, ...rest }) => (
+const RecruiterRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      isAuthenticated() && isAuthenticated().data.userRole === 1 ? (
+      isAuthenticated() && isAuthenticated().data.userRole === 0 ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -17,4 +17,4 @@ const CandidateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default CandidateRoute;
+export default RecruiterRoute;
