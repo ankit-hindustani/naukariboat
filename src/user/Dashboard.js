@@ -73,8 +73,8 @@ function Dashboard() {
           </div>
         </div>
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-3 col-sm-7">
+          <div className="row justify-content-center pl-5">
+            <div className="col-md-3 ">
               <button
                 className="btn btn-primary"
                 onClick={() => {

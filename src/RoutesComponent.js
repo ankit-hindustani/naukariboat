@@ -19,9 +19,10 @@ const RoutesComponent = () => {
         <Route path="/" exact component={Home} />
         <Route path="/signin" exact component={Singin} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/resetpassword" exact component={ResetPassword} />
         <Route path="/forgetpassword" exact component={ForgetPassword} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/resetpassword" exact component={ResetPassword} />
+
       </Switch>
       
     </BrowserRouter>
