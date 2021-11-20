@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link, Route, Routes, Navigate } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import { authenticate, signin } from "../auth";
 import "../user/Signin.css";
 
 function Singin() {
+  var history = useHistory();
   const [errors, setErrors] = useState({
     message: "",
     emailError: "",
@@ -55,13 +56,8 @@ function Singin() {
 
   const redirectUser = () => {
     if (referToDashboard) {
-      //   return <Redirect to="/" />
-
-      return (
-        <Routes>
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      );
+      history.push("/dashboard");
+        return <Redirect to="/dashboard" />
     }
   };
 

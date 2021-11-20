@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory,withRouter,Redirect } from "react-router-dom";
 import { isAuthenticated, signout } from "../auth";
 import "../core/Navbar.css";
 const Navbar = () => {
+  let history = useHistory();
+
   return (
     <>
       <div id="header">
@@ -16,12 +18,27 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="col-6 buttonToggle">
-            {!isAuthenticated() && <Link to="/signin" class="float-right">
-              <button className="btn btn-primary mb-2 bg-transparent">Login/Signup</button>
-            </Link>}
-            {isAuthenticated() && <Link to="/" class="float-right">
-              <button className="btn btn-primary mb-2 bg-transparent" onClick={signout()}>Logout</button>
-            </Link>}
+            {console.log("isAuth" + isAuthenticated())}
+            {isAuthenticated() ? (
+              <Link to="/" class="float-right float-right">
+              <button
+                className="btn btn-primary mb-2 bg-transparent "
+                onClick={signout(() => {
+                  history.push("/");
+                  <Redirect to="/" />
+                  
+                })}
+              >
+                Logout
+              </button>
+              </Link>
+            ) : (
+              <Link to="/signin" class="float-right">
+                <button className="btn btn-primary mb-2 bg-transparent">
+                  Login/Signup
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

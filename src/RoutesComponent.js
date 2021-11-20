@@ -1,8 +1,10 @@
 import React from "react";
-import { BrowserRouter,Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import App from "./App";
+import PrivateRoute from "./auth/PrivateRoute";
 import Home from "./core/Home";
 import Navbar from "./core/Navbar";
+import Dashboard from "./user/Dashboard";
 import ForgetPassword from "./user/ForgetPassword";
 import ResetPassword from "./user/ResetPassword";
 import Singin from "./user/Signin";
@@ -12,15 +14,16 @@ import Signup from "./user/Signup";
 const RoutesComponent = () => {
   return (
     <BrowserRouter>
-    <Navbar/>
-      <Routes>
-        <Route path="/"  element={<Home/>} />
-        <Route path="/signin"  element={<Singin/>} />
-        <Route path="/signup"  element={<Signup/>} />
-        <Route path="/resetpassword"  element={<ResetPassword/>} />
-        <Route path="/forgetpassword"  element={<ForgetPassword/>} />
-        
-      </Routes>
+      <Navbar />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/signin" exact component={Singin} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/resetpassword" exact component={ResetPassword} />
+        <Route path="/forgetpassword" exact component={ForgetPassword} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+      </Switch>
+      
     </BrowserRouter>
   );
 };

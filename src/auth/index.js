@@ -41,9 +41,10 @@ export const authenticate = (data, cb) => {
   }
 };
 
-export const signout = (data, cb) => {
+export const signout = (cb) => {
   if (typeof window !== "undefined") {
-    localStorage.removeItem("jwt").cb();
+    localStorage.removeItem("jwt");
+    cb();
   }
 };
 
