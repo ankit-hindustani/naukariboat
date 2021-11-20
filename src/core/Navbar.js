@@ -1,10 +1,12 @@
-import React from "react";
-import { Link, useHistory,withRouter,Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory,useLocation,withRouter,Redirect } from "react-router-dom";
 import { isAuthenticated, signout } from "../auth";
 import "../core/Navbar.css";
 const Navbar = () => {
   let history = useHistory();
-
+  // let location = useLocation();
+  // useEffect(() => {
+  // }, [location]);
   return (
     <>
       <div id="header">
@@ -23,7 +25,7 @@ const Navbar = () => {
               <Link to="/" class="float-right float-right">
               <button
                 className="btn btn-primary mb-2 bg-transparent "
-                onClick={signout(() => {
+                onClick={()=>signout(() => {
                   history.push("/");
                   <Redirect to="/" />
                   

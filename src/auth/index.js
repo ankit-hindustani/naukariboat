@@ -63,6 +63,7 @@ export const updatePassword = (user) => {
 
 export const authenticate = (data, cb) => {
   if (typeof window !== "undefined") {
+    alert("authenticate called"+JSON.stringify(data))
     localStorage.setItem("jwt", JSON.stringify(data));
     cb();
   }
