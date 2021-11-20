@@ -43,19 +43,28 @@ function Dashboard() {
       </div>
       <div className="container-fluid section2">
         <div className="container jobContainer">
-          <div className="row justify-content-between">
+          <div className="row justify-content-center">
             {loading ? <h4>Loading...</h4> : ""}
+            {message ? <h4>{message}</h4> : ""}
+
 
             {data?data.map((data)=>{
-                return <div className="col-md-3 m-1 p-4 bg-white rounded">
+                return <div className="col-md-3 m-2 p-4 bg-white rounded">
               <div>
                 <h5 className="row light-blue pr-3">{data.title}</h5>
               </div>
               <div className="row">
-                <p className="text-justify">
+                <p className="text-justify textTruncate">
                  {data.description}
                 </p>
+                
               </div>
+              <div className="row">
+                    <div className="col-6"><i className="fa fa-map-marker-alt text-primary"></i> {data.location}</div>
+                    <div className="col-6">
+                        <button className="btn btn-info btn-sm">View Applicatants</button>
+                    </div>
+                </div>
             </div>
             }):""}
             
@@ -65,7 +74,7 @@ function Dashboard() {
         </div>
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-md-4 col-sm-7">
+            <div className="col-md-3 col-sm-7">
               <button
                 className="btn btn-primary"
                 onClick={() => {
