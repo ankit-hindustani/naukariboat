@@ -62,7 +62,7 @@ function CandidateDashboard() {
               <div className="row">
                     <div className="col-6"><i className="fa fa-map-marker-alt text-primary"></i> {data.location}</div>
                     <div className="col-6">
-                        <button className="btn btn-info btn-sm">View Applicatants</button>
+                        <button className="btn btn-info btn-sm">Apply</button>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@ function CandidateDashboard() {
         </div>
         <div className="container">
           <div className="row justify-content-center pl-5">
-            <div className="col-md-3 ">
+            <div className="">
               <button
                 className="btn btn-primary"
                 onClick={() => {

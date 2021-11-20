@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Link,
   useHistory,
-  useLocation,
   withRouter,
   Redirect,
 } from "react-router-dom";
