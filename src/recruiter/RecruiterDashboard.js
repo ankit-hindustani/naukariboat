@@ -129,7 +129,7 @@ function RecruiterDashboard() {
         </div>
         <div className="container">
           <div className="row justify-content-center pl-5">
-            <div className="col-md-3 ">
+            <div className="">
               <button
                 className="btn btn-primary"
                 onClick={() => {
