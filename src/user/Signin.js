@@ -32,7 +32,7 @@ function Singin() {
           message: data.message,
         });
       }
-      if (data.errors) {
+      else if (data.errors) {
         data.errors.map((e) => {
           if ("email" in e) {
             return setErrors({ emailError: Object.values(e)[0] });
@@ -43,7 +43,7 @@ function Singin() {
         });
       } else {
         authenticate(data, () => {
-          setValues({ ...values, referToDashboard: true });
+          setValues({ ...values,referToDashboard:true });
         });
       }
 
