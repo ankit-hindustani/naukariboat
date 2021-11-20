@@ -61,6 +61,25 @@ export const updatePassword = (user) => {
     });
 };
 
+export const postjob = (user) => {
+  return fetch(`${API}/jobs/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization:isAuthenticated().data.token
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => {
+      // console.log("response by postjob method = "+response);
+      return response.json();
+    })
+    .catch((err) => {
+      console.log("err" + err);
+    });
+};
+
 export const authenticate = (data, cb) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(data));

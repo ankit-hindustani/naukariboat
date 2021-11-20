@@ -1,0 +1,23 @@
+.section1{
+    background: #303F60;
+}
+.postJobSection{
+    
+    margin-bottom: -220px;
+    margin-top: 100px;
+}
+/* .section1row{
+    border: 5px solid green;
+} */
+.postJobSection2{
+    height: 50vh;
+    background: #EDF6FF;
+}
+.round{
+    border-radius: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+.center{
+    text-align: center;
+}

@@ -6,6 +6,7 @@ import RecruiterRoute from "./auth/RecruiterRoute";
 import CandidateDashboard from "./candidate/CandidateDashboard";
 import Home from "./core/Home";
 import Navbar from "./core/Navbar";
+import Postjob from "./recruiter/Postjob";
 import RecruiterDashboard from "./recruiter/RecruiterDashboard";
 import ForgetPassword from "./user/ForgetPassword";
 import ResetPassword from "./user/ResetPassword";
@@ -27,6 +28,8 @@ const RoutesComponent = () => {
         <CandidateRoute path="/candidatedashboard" exact component={CandidateDashboard} />
         <RecruiterRoute path="/resetpassword" exact component={ResetPassword} />
         <RecruiterRoute path="/recruiterdashboard" exact component={RecruiterDashboard} />
+        <RecruiterRoute path="/postjob" exact component={Postjob} />
+
       
 
       </Switch>
