@@ -35,9 +35,10 @@ function Singin() {
       else if (data.errors) {
         data.errors.map((e) => {
           if ("email" in e) {
-            return setErrors({ emailError: Object.values(e)[0] });
-          } else if ("password" in e) {
-            return setErrors({ passwordError: Object.values(e)[0] });
+             setErrors({ emailError: Object.values(e)[0] });
+          }
+          if ("password" in e) {
+           setErrors({ passwordError: Object.values(e)[0] });
           }
           return "";
         });

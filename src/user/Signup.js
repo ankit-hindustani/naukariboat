@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { signup } from "../auth";
+import { Link,useHistory,Redirect } from "react-router-dom";
+import { authenticate, signup } from "../auth";
 import "../user/Signup.css";
 
 function Signup() {
+  var history = useHistory();
+
   const [errors, setErrors] = useState({
     message: "",
     nameError: "",
@@ -17,11 +19,13 @@ function Signup() {
     confirmPassword: "",
     name: "",
     skills: "",
+    referToDashboard: false,
+
   });
   //change userRole to Integer
   values.userRole = Number(values.userRole);
   const { message, nameError, emailError, passwordError } = errors;
-  const { email, userRole, password, confirmPassword, name, skills } = values;
+  const { email, userRole, password, confirmPassword, name, skills,referToDashboard } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -37,7 +41,7 @@ function Signup() {
           setErrors({
             message: data.message,
           });
-        } else {
+        }else if(data.errors){
           data.errors.map((e) => {
             if ("email" in e) {
               return setErrors({ emailError: Object.values(e)[0] });
@@ -47,6 +51,10 @@ function Signup() {
               return setErrors({ passwordError: Object.values(e)[0] });
             }
             return "";
+          });
+        }else {
+          authenticate(data, () => {
+            setValues({ ...values,referToDashboard:true });
           });
         }
 
@@ -60,6 +68,13 @@ function Signup() {
         });
       }
     );
+  };
+
+  const redirectUser = () => {
+    if (referToDashboard) {
+      history.push("/dashboard");
+        return <Redirect to="/dashboard" />
+    }
   };
 
   return (
@@ -203,6 +218,8 @@ function Signup() {
         </div>
       </div>
       <div className="container-fluid signupSection2"></div>
+      {redirectUser()}
+
     </>
   );
 }
