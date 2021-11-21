@@ -37,7 +37,7 @@ function Dashboard() {
       <div className="container-fluid dashSection1">
         <div className="container pt-2">
           <div className="row  pb-4">
-            <h5 className="text-white font-weight-bold">Jobs posted</h5>
+            <h5 className="text-white font-weight-bold">All jobs</h5>
           </div>
         </div>
       </div>

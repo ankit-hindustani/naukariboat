@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link,useHistory,Redirect } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import { authenticate, signup } from "../auth";
 import "../user/Signup.css";
 
@@ -20,17 +20,23 @@ function Signup() {
     name: "",
     skills: "",
     referToDashboard: false,
-
   });
   //change userRole to Integer
   values.userRole = Number(values.userRole);
   const { message, nameError, emailError, passwordError } = errors;
-  const { email, userRole, password, confirmPassword, name, skills,referToDashboard } = values;
+  const {
+    email,
+    userRole,
+    password,
+    confirmPassword,
+    name,
+    skills,
+    referToDashboard,
+  } = values;
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  
   const clickSubmit = (event) => {
     event.preventDefault();
     //send to server
@@ -41,7 +47,7 @@ function Signup() {
           setErrors({
             message: data.message,
           });
-        }else if(data.errors){
+        } else if (data.errors) {
           data.errors.map((e) => {
             if ("email" in e) {
               return setErrors({ emailError: Object.values(e)[0] });
@@ -52,9 +58,9 @@ function Signup() {
             }
             return "";
           });
-        }else {
+        } else {
           authenticate(data, () => {
-            setValues({ ...values,referToDashboard:true });
+            setValues({ ...values, referToDashboard: true });
           });
         }
 
@@ -73,7 +79,7 @@ function Signup() {
   const redirectUser = () => {
     if (referToDashboard) {
       history.push("/dashboard");
-        return <Redirect to="/dashboard" />
+      return <Redirect to="/dashboard" />;
     }
   };
 
@@ -84,7 +90,7 @@ function Signup() {
           <div className="col-md-5 signupformsection ">
             <form className="bg-white p-4 text-dark round ">
               <h4 className="">Signup</h4>
-              {message?<p className="text-danger m-0">{message}</p>:""}
+              {message ? <p className="text-danger m-0">{message}</p> : ""}
               <label for="btnToggle" className="mt-4">
                 I'm a*
               </label>
@@ -98,7 +104,7 @@ function Signup() {
                 <input
                   type="radio"
                   class="btn-check hideCircle"
-                  value="1"
+                  value="0"
                   onChange={handleChange("userRole")}
                   name="role"
                   id="btnradioRecruiter"
@@ -111,7 +117,7 @@ function Signup() {
                 <input
                   type="radio"
                   class="btn-check hideCircle"
-                  value="0"
+                  value="1"
                   onChange={handleChange("userRole")}
                   name="role"
                   id="btnradioCandidate"
@@ -134,8 +140,13 @@ function Signup() {
                   placeholder="Enter your full name"
                 />
                 <small>
-                  {nameError?<label for="inputName" className="text-danger">
-                    {nameError}</label>:""}
+                  {nameError ? (
+                    <label for="inputName" className="text-danger">
+                      {nameError}
+                    </label>
+                  ) : (
+                    ""
+                  )}
                 </small>
               </div>
               <div className="form-group">
@@ -150,8 +161,13 @@ function Signup() {
                   placeholder="Enter your email"
                 />
                 <small>
-                {emailError?<label for="inputName" className="text-danger">
-                    {emailError}</label>:""}
+                  {emailError ? (
+                    <label for="inputName" className="text-danger">
+                      {emailError}
+                    </label>
+                  ) : (
+                    ""
+                  )}
                 </small>
               </div>
               <div class="form-row">
@@ -177,8 +193,13 @@ function Signup() {
                     placeholder="Enter your password"
                   />
                   <small>
-                  {passwordError?<label for="inputName" className="text-danger">
-                    {passwordError}</label>:""}
+                    {passwordError ? (
+                      <label for="inputName" className="text-danger">
+                        {passwordError}
+                      </label>
+                    ) : (
+                      ""
+                    )}
                   </small>
                 </div>
               </div>
@@ -219,7 +240,6 @@ function Signup() {
       </div>
       <div className="container-fluid signupSection2"></div>
       {redirectUser()}
-
     </>
   );
 }
