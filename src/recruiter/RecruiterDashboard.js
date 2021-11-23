@@ -16,35 +16,35 @@ function RecruiterDashboard() {
   const [message, setMessage] = useState(null);
   const [applicantsMessage, setapplicantsMessage] = useState(null);
   const [modalShow, setModalShow] = useState(false);
-    useEffect(() => {
-      fetch(`${API}/recruiters/jobs?page=${pageNum}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: isAuthenticated().data.token,
-        },
+  useEffect(() => {
+    fetch(`${API}/recruiters/jobs?page=${pageNum}`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: isAuthenticated().data.token,
+      },
+    })
+      .then((response) => {
+        return response.json();
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          // console.log("data recruiter response = " + data);
-          if (data.data) {
-            setData(data.data.data);
-          } else if (data.message) {
-            setMessage(data.message);
-            setData(null);
-          } else if (data.name) {
-            setError(data.name);
-          }
-        })
-        .catch((err) => {
-          console.log("err= " + err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, [pageNum]);
+      .then((data) => {
+        // console.log("data recruiter response = " + data);
+        if (data.data) {
+          setData(data.data.data);
+        } else if (data.message) {
+          setMessage(data.message);
+          setData(null);
+        } else if (data.name) {
+          setError(data.name);
+        }
+      })
+      .catch((err) => {
+        console.log("err= " + err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [pageNum]);
 
   const fetchApplicants = (id) => {
     fetch(`${API}/recruiters/jobs/${id}/candidates`, {
@@ -86,6 +86,7 @@ function RecruiterDashboard() {
               <h5 className="text-white font-weight-bold">Job posted by you</h5>
             </div>
             <div className="col-6 float-right">
+            
               <div className="float-right">
                 <Link
                   to="/postjob"
@@ -126,7 +127,6 @@ function RecruiterDashboard() {
                           onClick={() => {
                             setModalShow(true);
                             fetchApplicants(data.id);
-                            
                           }}
                         >
                           View Applications
@@ -142,7 +142,7 @@ function RecruiterDashboard() {
               ""
             )}
 
-            {!data && pageNum===1 ? (
+            {!data && pageNum === 1 ? (
               <div className="container">
                 <div className="row mt-5 pt-5 justify-content-center">
                   <div className="">
@@ -180,7 +180,6 @@ function RecruiterDashboard() {
               data={applicantsData}
               message={applicantsMessage}
               loading={applicantsLoading}
-              
             />
 
             {/* modal end */}

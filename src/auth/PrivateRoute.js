@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       isAuthenticated() ? (
         <Component {...props} />
       ) : (
-        <Redirect
+        <Redirect  
           to={{ pathname: "/signin", state: { from: props.location } }}
         />
       )

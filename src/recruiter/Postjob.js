@@ -24,12 +24,15 @@ function Postjob() {
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
+  var tError;
+  var dError;
+  var lError;
 
   const clickSubmit = (event) => {
     event.preventDefault();
     //send to server
     postjob({ title, description, location }).then((data) => {
-    //   console.log("data response" + JSON.stringify(data));
+      //   console.log("data response" + JSON.stringify(data));
       if (data.message) {
         setErrors({
           message: data.message,
@@ -37,25 +40,29 @@ function Postjob() {
       } else if (data.errors) {
         data.errors.map((e) => {
           if ("title" in e) {
-            setErrors({ titleError: Object.values(e)[0] });
+            tError = Object.values(e)[0];
           }
           if ("description" in e) {
-            setErrors({ descriptionError: Object.values(e)[0] });
+            dError = Object.values(e)[0];
           }
           if ("location" in e) {
-            setErrors({ locationError: Object.values(e)[0] });
+            lError = Object.values(e)[0];
           }
           return "";
         });
-      } else if(data.success){
+        setErrors({
+          titleError: tError,
+          descriptionError: dError,
+          locationError: lError,
+        });
+      } else if (data.success) {
         setValues({ ...values, referToDashboard: true });
+        setValues({
+          title: "",
+          description: "",
+          location: "",
+        });
       }
-
-      setValues({
-        title: "",
-        description: "",
-        location: "",
-      });
     });
   };
 
@@ -68,7 +75,7 @@ function Postjob() {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="container-fluid section1">
         <div className="row justify-content-center section1row">
           <div className="col-md-5 postJobSection ">
