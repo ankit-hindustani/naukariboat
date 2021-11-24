@@ -142,7 +142,7 @@ function RecruiterDashboard() {
               ""
             )}
 
-            {!data && !message ? (
+            {!data && pageNum===1 ? (
               <div className="container">
                 <div className="row mt-5 pt-5 justify-content-center">
                   <div className="">
