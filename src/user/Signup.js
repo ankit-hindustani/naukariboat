@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { authenticate, isAuthenticated, signup } from "../auth";
 import Navbar from "../core/Navbar";
@@ -13,6 +14,7 @@ function Signup() {
     emailError: "",
     passwordError: "",
     confirmPasswordError: "",
+    skillsError: "",
   });
   const [values, setValues] = useState({
     email: "",
@@ -23,6 +25,7 @@ function Signup() {
     skills: "",
     referToDashboard: false,
   });
+  const [loading, setLoading] = useState(false);
 
   const [toggleBtn, settoggleBtn] = useState({
     toggle1: "btn btn-outline-primary m-2 toggleBtn active",
@@ -32,7 +35,15 @@ function Signup() {
   var nError = "";
   var pError = "";
   var cError = "";
-  const { message, nameError, emailError, passwordError,confirmPasswordError } = errors;
+  var sError = "";
+  const {
+    message,
+    nameError,
+    emailError,
+    passwordError,
+    confirmPasswordError,
+    skillsError,
+  } = errors;
   const {
     email,
     userRole,
@@ -49,8 +60,9 @@ function Signup() {
   const clickSubmit = (event) => {
     event.preventDefault();
     //send to server
-    signup({ email, userRole, password, confirmPassword, name, skills }).then(
-      (data) => {
+    setLoading(true);
+    signup({ email, userRole, password, confirmPassword, name, skills })
+      .then((data) => {
         // console.log("data" + JSON.stringify(data));
         if (data.message) {
           setErrors({
@@ -70,6 +82,10 @@ function Signup() {
             if ("confirmPassword" in e) {
               cError = Object.values(e)[0];
             }
+            if ("skills" in e) {
+              sError = Object.values(e)[0];
+            }
+
             return "";
           });
           setErrors({
@@ -77,6 +93,7 @@ function Signup() {
             nameError: nError,
             passwordError: pError,
             confirmPasswordError: cError,
+            skillsError: sError,
           });
         } else {
           authenticate(data, () => {
@@ -91,8 +108,10 @@ function Signup() {
             });
           });
         }
-      }
-    );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const redirectUser = () => {
@@ -183,7 +202,7 @@ function Signup() {
                 />
                 <small>
                   {emailError ? (
-                    <label for="inputName" className="text-danger">
+                    <label for="inputEmail" className="text-danger">
                       {emailError}
                     </label>
                   ) : (
@@ -215,14 +234,14 @@ function Signup() {
                   />
                   <small>
                     {passwordError ? (
-                      <label for="inputName" className="text-danger">
+                      <label for="inputPassword" className="text-danger">
                         {passwordError}
                       </label>
                     ) : (
                       ""
                     )}
                     {confirmPasswordError ? (
-                      <label for="inputName" className="text-danger">
+                      <label for="ConfirmInputPassword" className="text-danger">
                         {confirmPasswordError}
                       </label>
                     ) : (
@@ -232,7 +251,7 @@ function Signup() {
                 </div>
               </div>
               <div className="form-group">
-                <label for="inputName">Skills</label>
+                <label for="inputSkill">Skills</label>
                 <input
                   type="text"
                   className="form-control form-control-lg"
@@ -242,7 +261,17 @@ function Signup() {
                   aria-describedby="skillHelp"
                   placeholder="Enter comma seprated skills"
                 />
+                <small>
+                  {skillsError ? (
+                    <label for="inputSkill" className="text-danger">
+                      {skillsError}
+                    </label>
+                  ) : (
+                    ""
+                  )}
+                </small>
               </div>
+
               <div className="row p-4 ">
                 <div className="col center">
                   <button
@@ -250,8 +279,9 @@ function Signup() {
                     onClick={clickSubmit}
                     className="btn pl-4 pr-4 btn-primary btn-lg mb-5 center "
                   >
-                    Signup
+                    {loading ? "Loading..." : "Signup"}
                   </button>
+
                   <p>
                     Have an account?{" "}
                     <span>

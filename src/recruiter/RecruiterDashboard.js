@@ -27,6 +27,7 @@ function RecruiterDashboard() {
       .then((response) => {
         return response.json();
       })
+
       .then((data) => {
         // console.log("data recruiter response = " + data);
         if (data.data) {
@@ -86,7 +87,6 @@ function RecruiterDashboard() {
               <h5 className="text-white font-weight-bold">Job posted by you</h5>
             </div>
             <div className="col-6 float-right">
-            
               <div className="float-right">
                 <Link
                   to="/postjob"
@@ -95,6 +95,7 @@ function RecruiterDashboard() {
                   Post a Job
                 </Link>
               </div>
+              <div> </div>
             </div>
           </div>
         </div>
@@ -102,14 +103,13 @@ function RecruiterDashboard() {
       <div className="container-fluid section2">
         <div className="container jobContainer">
           <div className="row justify-content-center">
-            {loading ? <h4>Loading...</h4> : ""}
-
+            {loading ? <h4> Loading... </h4> : ""}
             {data ? (
               data.map((data) => {
                 return (
                   <div className="col-md-3 m-2 p-4 bg-white rounded">
                     <div>
-                      <h5 className="row light-blue pr-3">{data.title}</h5>
+                      <h5 className="row light-blue pr-3"> {data.title} </h5>
                     </div>
                     <div className="row">
                       <p className="text-justify textTruncate">
@@ -118,7 +118,7 @@ function RecruiterDashboard() {
                     </div>
                     <div className="row">
                       <div className="col-6">
-                        <i className="fa fa-map-marker-alt text-primary"></i>{" "}
+                        <i className="fa fa-map-marker-alt text-primary"> </i>
                         {data.location}
                       </div>
                       <div className="col-6">
@@ -137,19 +137,17 @@ function RecruiterDashboard() {
                 );
               })
             ) : message ? (
-              <h4 className="text-muted">{message}</h4>
+              <h4 className="text-muted"> {message} </h4>
             ) : (
               ""
             )}
-
             {!data && pageNum === 1 ? (
               <div className="container">
                 <div className="row mt-5 pt-5 justify-content-center">
                   <div className="">
-                    <i class="fas fa-edit text-muted fa-6x "></i>
+                    <i class="fas fa-edit text-muted fa-6x "> </i>
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="m-auto pt-3">
                     <h5 className="text-muted ">
@@ -160,7 +158,7 @@ function RecruiterDashboard() {
                 <div className="row">
                   <div className="m-auto pt-3">
                     <Link to="/postjob">
-                      <button className="btn btn-info">Post a Job</button>
+                      <button className="btn btn-info"> Post a Job </button>
                     </Link>
                   </div>
                 </div>
@@ -173,7 +171,6 @@ function RecruiterDashboard() {
         <div className="container">
           <div className="row justify-content-center">
             {/* modal start */}
-
             <ApplicationModel
               show={modalShow}
               onHide={() => setModalShow(false)}
@@ -181,7 +178,6 @@ function RecruiterDashboard() {
               message={applicantsMessage}
               loading={applicantsLoading}
             />
-
             {/* modal end */}
             <div className="">
               <button
@@ -191,18 +187,14 @@ function RecruiterDashboard() {
                     setPageNum(pageNum - 1);
                   }
                 }}
-              >
-                {"<"}
-              </button>
-              <i>current page {pageNum}</i>
+              >{"<"}</button>
+              <i> current page {pageNum} </i>
               <button
                 className="btn btn-primary"
                 onClick={() => {
                   setPageNum(pageNum + 1);
                 }}
-              >
-                {">"}
-              </button>
+              >{">"}</button>
             </div>
           </div>
         </div>

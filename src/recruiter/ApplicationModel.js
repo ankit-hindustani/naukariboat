@@ -1,5 +1,5 @@
 import Button from "@restart/ui/esm/Button";
-import { Container, Modal } from "react-bootstrap";
+import { Container, Modal,  } from "react-bootstrap";
 import "../recruiter/RecruiterDashboard.css";
 
 function ApplicationModel(props) {
