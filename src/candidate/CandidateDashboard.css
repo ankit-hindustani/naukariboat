@@ -15,6 +15,7 @@
 .center{
     text-align: center;
 }
+/* S.overflow */
 .textTruncate{
     -webkit-line-clamp: 3;
     display: -webkit-box;

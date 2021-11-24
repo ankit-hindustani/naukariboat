@@ -14,10 +14,6 @@
     background: #EDF6FF;
 }
 
-.hideCircle {
-    /* display: none; */
-    /*visibility: hidden;*/
-}
 
 .round{
     border-radius: 25px;
@@ -26,4 +22,7 @@
 }
 .center{
     text-align: center;
+}
+.toggleBtn:hover{
+color:#fff;
 }

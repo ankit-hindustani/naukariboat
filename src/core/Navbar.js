@@ -2,17 +2,13 @@ import React from "react";
 import {
   Link,
   useHistory,
-  withRouter,
   Redirect,
 } from "react-router-dom";
 import { isAuthenticated, signout } from "../auth";
 import "../core/Navbar.css";
-import ToastMessage from "./ToestMessage";
 const Navbar = () => {
   let history = useHistory();
-  // let location = useLocation();
-  // useEffect(() => {
-  // }, [location]);
+  
   return (
     <>
       <div id="header">

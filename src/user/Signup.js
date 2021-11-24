@@ -12,6 +12,7 @@ function Signup() {
     nameError: "",
     emailError: "",
     passwordError: "",
+    confirmPasswordError: "",
   });
   const [values, setValues] = useState({
     email: "",
@@ -22,9 +23,16 @@ function Signup() {
     skills: "",
     referToDashboard: false,
   });
-  //change userRole to Integer
-  values.userRole = Number(values.userRole);
-  const { message, nameError, emailError, passwordError } = errors;
+
+  const [toggleBtn, settoggleBtn] = useState({
+    toggle1: "btn btn-outline-primary m-2 toggleBtn active",
+    toggle2: "btn btn-outline-primary m-2 toggleBtn",
+  });
+  var eError = "";
+  var nError = "";
+  var pError = "";
+  var cError = "";
+  const { message, nameError, emailError, passwordError,confirmPasswordError } = errors;
   const {
     email,
     userRole,
@@ -51,28 +59,38 @@ function Signup() {
         } else if (data.errors) {
           data.errors.map((e) => {
             if ("email" in e) {
-              return setErrors({ emailError: Object.values(e)[0] });
-            } else if ("name" in e) {
-              return setErrors({ nameError: Object.values(e)[0] });
-            } else if ("password" in e) {
-              return setErrors({ passwordError: Object.values(e)[0] });
+              eError = Object.values(e)[0];
+            }
+            if ("name" in e) {
+              nError = Object.values(e)[0];
+            }
+            if ("password" in e) {
+              pError = Object.values(e)[0];
+            }
+            if ("confirmPassword" in e) {
+              cError = Object.values(e)[0];
             }
             return "";
+          });
+          setErrors({
+            emailError: eError,
+            nameError: nError,
+            passwordError: pError,
+            confirmPasswordError: cError,
           });
         } else {
           authenticate(data, () => {
             setValues({ ...values, referToDashboard: true });
+            setValues({
+              email: "",
+              userRole: "",
+              password: "",
+              confirmPassword: "",
+              name: "",
+              skills: "",
+            });
           });
         }
-
-        setValues({
-          email: "",
-          userRole: "",
-          password: "",
-          confirmPassword: "",
-          name: "",
-          skills: "",
-        });
       }
     );
   };
@@ -80,16 +98,18 @@ function Signup() {
   const redirectUser = () => {
     if (referToDashboard && isAuthenticated().data.userRole === 1) {
       history.push("/candidatedashboard");
-        return <Redirect to="/candidatedashboard" />
-    }if (referToDashboard && isAuthenticated().data.userRole === 0) {
-      history.push("/recruiterdashboard");
-        return <Redirect to="/recruiterdashboard" />
+      return <Redirect to="/candidatedashboard" />;
     }
-    
+    if (referToDashboard && isAuthenticated().data.userRole === 0) {
+      history.push("/recruiterdashboard");
+      return <Redirect to="/recruiterdashboard" />;
+    }
   };
 
   return (
-    <> <Navbar/>
+    <>
+      {" "}
+      <Navbar />
       <div className="container-fluid section1">
         <div className="row justify-content-center section1row">
           <div className="col-md-5 signupformsection ">
@@ -100,37 +120,33 @@ function Signup() {
                 I'm a*
               </label>
               <br />
-              <div
-                id="btnToggle"
-                class="btn-group"
-                role="group"
-                aria-label="Basic radio toggle button group"
-              >
-                <input
-                  type="radio"
-                  class="btn-check hideCircle"
-                  value="0"
-                  onChange={handleChange("userRole")}
-                  name="role"
-                  id="btnradioRecruiter"
-                  autocomplete="off"
-                />
-                <label class="btn btn-outline-primary mr-3" for="btnradio1">
+              <div id="btnToggle" className="row">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setValues({ ...values, userRole: 0 });
+                    settoggleBtn({
+                      toggle1: "btn btn-outline-primary m-2 active toggleBtn",
+                      toggle2: "btn btn-outline-primary m-2 toggleBtn",
+                    });
+                  }}
+                  className={toggleBtn.toggle1}
+                >
                   Recruiter
-                </label>
-
-                <input
-                  type="radio"
-                  class="btn-check hideCircle"
-                  value="1"
-                  onChange={handleChange("userRole")}
-                  name="role"
-                  id="btnradioCandidate"
-                  autocomplete="off"
-                />
-                <label class="btn btn-outline-primary" for="btnradio3">
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setValues({ ...values, userRole: 1 });
+                    settoggleBtn({
+                      toggle1: "btn btn-outline-primary m-2 toggleBtn",
+                      toggle2: "btn btn-outline-primary active m-2 toggleBtn",
+                    });
+                  }}
+                  className={toggleBtn.toggle2}
+                >
                   Candidate
-                </label>
+                </button>
               </div>
 
               <div className="form-group">
@@ -201,6 +217,13 @@ function Signup() {
                     {passwordError ? (
                       <label for="inputName" className="text-danger">
                         {passwordError}
+                      </label>
+                    ) : (
+                      ""
+                    )}
+                    {confirmPasswordError ? (
+                      <label for="inputName" className="text-danger">
+                        {confirmPasswordError}
                       </label>
                     ) : (
                       ""

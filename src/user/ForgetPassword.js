@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import {  Redirect } from "react-router-dom";
 import { authenticate, resetPassword } from "../auth";
 import Navbar from "../core/Navbar";
 import "../user/ForgetPassword.css";
 
 function ForgetPassword() {
-  var history = useHistory();
   const [errors, setErrors] = useState({
     message: "",
   });

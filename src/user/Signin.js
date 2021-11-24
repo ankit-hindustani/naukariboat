@@ -4,7 +4,7 @@ import { authenticate, isAuthenticated, signin } from "../auth";
 import Navbar from "../core/Navbar";
 import "../user/Signin.css";
 
-function Singin() {
+function Singin() { 
   var history = useHistory();
   const [errors, setErrors] = useState({
     message: "",
@@ -16,7 +16,8 @@ function Singin() {
     password: "",
     referToDashboard: false,
   });
-
+  var eError = "";
+  var pError = "";
   const { message, emailError, passwordError } = errors;
   const { email, password, referToDashboard } = values;
   const handleChange = (name) => (event) => {
@@ -36,23 +37,28 @@ function Singin() {
       else if (data.errors) {
         data.errors.map((e) => {
           if ("email" in e) {
-             setErrors({ emailError: Object.values(e)[0] });
+            eError = Object.values(e)[0];
           }
           if ("password" in e) {
-           setErrors({ passwordError: Object.values(e)[0] });
+            pError = Object.values(e)[0];
           }
           return "";
+        });
+        setErrors({
+          emailError: eError,
+          passwordError: pError,
         });
       } else {
         authenticate(data, () => {
           setValues({ ...values,referToDashboard:true });
+          setValues({
+            email: "",
+            password: "",
+          });
         });
       }
 
-      setValues({
-        email: "",
-        password: "",
-      });
+      
     });
   };
 

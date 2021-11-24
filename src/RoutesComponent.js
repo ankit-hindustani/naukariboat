@@ -1,12 +1,10 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import App from "./App";
 import CandidateRoute from "./auth/CandidateRoute";
 import PrivateRoute from "./auth/PrivateRoute";
 import RecruiterRoute from "./auth/RecruiterRoute";
 import CandidateDashboard from "./candidate/CandidateDashboard";
 import Home from "./core/Home";
-import Navbar from "./core/Navbar";
 import Postjob from "./recruiter/Postjob";
 import RecruiterDashboard from "./recruiter/RecruiterDashboard";
 import ForgetPassword from "./user/ForgetPassword";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { isAuthenticated, postjob } from "../auth";
 import Navbar from "../core/Navbar";
 import "../recruiter/Postjob.css";
